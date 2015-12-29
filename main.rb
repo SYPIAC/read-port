@@ -21,6 +21,9 @@ POST_URL = "http://localhost/temp"
 
 
 def actually_float?(val)
+  if !val.include? "."
+    return false
+  end
   begin
     Float(val)
   rescue ArgumentError => e
@@ -37,14 +40,14 @@ serialport = Serial.new '/dev/ttyS2', 9600
 agent      = Mechanize.new
 temp       = ''
 loop do
-  temp += serialport.read 4
-  if full_temp? temp
-    temp.chomp!
+  temp += serialport.read 5
+#  if full_temp? temp
+#    temp.chomp!
     if actually_float? temp
       puts temp
-      agent.post POST_URL, { "temp" => temp}
+#      agent.post POST_URL, { "temp" => temp}
     end
     temp = ''
-  end
+#  end
    # sleep(1)
 end
