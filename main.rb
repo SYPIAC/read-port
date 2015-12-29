@@ -17,7 +17,7 @@
 require 'rubyserial'
 require 'pry'
 require 'mechanize'
-POST_URL = "http://45.55.152.254/temp"
+POST_URL = "http://localhost/temp"
 
 
 def actually_float?(val)
@@ -37,7 +37,7 @@ serialport = Serial.new '/dev/ttyS2', 9600
 agent      = Mechanize.new
 temp       = ''
 loop do
-  temp += serialport.read(5)
+  temp += serialport.read 4
   if full_temp? temp
     temp.chomp!
     if actually_float? temp
@@ -46,5 +46,5 @@ loop do
     end
     temp = ''
   end
-  # sleep(0.5)
+   # sleep(1)
 end
