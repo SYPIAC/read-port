@@ -45,7 +45,7 @@ loop do
 #    temp.chomp!
     if actually_float? temp
       puts temp
-#      agent.post POST_URL, { "temp" => temp}
+      agent.post POST_URL, { "temp" => temp}
     end
     temp = ''
 #  end
