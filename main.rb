@@ -14,6 +14,7 @@
 #   end
 # end
 
+
 require 'rubyserial'
 require 'pry'
 require 'mechanize'
@@ -32,22 +33,18 @@ def actually_float?(val)
   true
 end
 
-def full_temp?(temp)
-  temp != temp.chomp
-end
-
 serialport = Serial.new '/dev/ttyS2', 9600
 agent      = Mechanize.new
 temp       = ''
 loop do
   temp += serialport.read 5
-#  if full_temp? temp
-#    temp.chomp!
     if actually_float? temp
-      puts temp
-      agent.post POST_URL, { "temp" => temp}
+#      puts temp
+      begin
+        agent.post POST_URL, { "temp" => temp, "time" => Time.now } 
+      rescue Mechanize::ResponseCodeError
+        puts String(Time.now) + "/" + temp + " C°\nServer not responding\n"
+      end
     end
     temp = ''
-#  end
-   # sleep(1)
 end

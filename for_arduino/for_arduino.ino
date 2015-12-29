@@ -34,5 +34,5 @@ void loop(void)
   // After we got the temperatures, we can print them here.
   // We use the function ByIndex, and as an example get the temperature from the first sensor only.
   Serial.println(sensors.getTempCByIndex(0));  
-  delay(1000);
+  delay(60000);
 }
