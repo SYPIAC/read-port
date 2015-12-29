@@ -19,6 +19,7 @@ require 'pry'
 require 'mechanize'
 POST_URL = "http://45.55.152.254/temp"
 
+
 def actually_float?(val)
   begin
     Float(val)
@@ -32,7 +33,7 @@ def full_temp?(temp)
   temp != temp.chomp
 end
 
-serialport = Serial.new '/dev/ttyACM0', 9600
+serialport = Serial.new '/dev/ttyS2', 9600
 agent      = Mechanize.new
 temp       = ''
 loop do
@@ -45,4 +46,5 @@ loop do
     end
     temp = ''
   end
+  # sleep(0.5)
 end
