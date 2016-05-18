@@ -8,6 +8,7 @@ bash -l
 rvm use 2.2.2
 #libraries
 gem install bundler
+
 bundle install
 #launch program
 ruby main.rb
